@@ -1,0 +1,219 @@
+// Escrow255 — Prisma Schema
+// East Africa Escrow Payment Platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  MERCHANT
+  ADMIN
+}
+
+enum KycStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum TransactionStatus {
+  PENDING
+  HELD
+  DISPUTED
+  RELEASED
+  REFUNDED
+  CANCELLED
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  DISPUTED
+}
+
+enum DisputeStatus {
+  OPEN
+  UNDER_REVIEW
+  RESOLVED
+}
+
+enum NotificationType {
+  TRANSACTION
+  DELIVERY
+  DISPUTE
+  PAYMENT
+  SYSTEM
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model User {
+  id             String    @id @default(uuid())
+  name           String
+  phone          String    @unique
+  email          String?   @unique
+  hashedPassword String    @map("hashed_password")
+  role           Role      @default(CUSTOMER)
+  kycStatus      KycStatus @default(PENDING) @map("kyc_status")
+  nationalId     String?   @map("national_id")
+  brelaNumber    String?   @map("brela_number")
+  isActive       Boolean   @default(true) @map("is_active")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  customerTransactions Transaction[] @relation("CustomerTransactions")
+  merchantTransactions Transaction[] @relation("MerchantTransactions")
+  raisedDisputes       Dispute[]     @relation("RaisedDisputes")
+  resolvedDisputes     Dispute[]     @relation("ResolvedDisputes")
+  ratingsMade          Rating[]      @relation("RatingsMade")
+  ratingsReceived      Rating[]      @relation("RatingsReceived")
+  notifications        Notification[]
+  auditLogs            AuditLog[]    @relation("ActorLogs")
+
+  @@map("users")
+}
+
+model Transaction {
+  id                     String            @id @default(uuid())
+  customerId             String            @map("customer_id")
+  merchantId             String            @map("merchant_id")
+  amount                 Decimal           @db.Decimal(15, 2)
+  currency               String            @default("TZS")
+  status                 TransactionStatus @default(PENDING)
+  agreementDescription   String            @map("agreement_description") @db.Text
+  productPhotos          String[]          @map("product_photos")
+  inspectionWindowHours  Int               @default(48) @map("inspection_window_hours")
+  otpCode                String?           @map("otp_code")
+  otpVerified            Boolean           @default(false) @map("otp_verified")
+  platformFee            Decimal           @default(0) @db.Decimal(15, 2) @map("platform_fee")
+  selcomOrderId          String?           @map("selcom_order_id")
+  selcomPaymentRef       String?           @map("selcom_payment_ref")
+  releasedAt             DateTime?         @map("released_at")
+  inspectionDeadline     DateTime?         @map("inspection_deadline")
+  createdAt              DateTime          @default(now()) @map("created_at")
+  updatedAt              DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  customer      User         @relation("CustomerTransactions", fields: [customerId], references: [id])
+  merchant      User         @relation("MerchantTransactions", fields: [merchantId], references: [id])
+  milestones    Milestone[]
+  disputes      Dispute[]
+  delivery      Delivery?
+  ratings       Rating[]
+  auditLogs     AuditLog[]
+
+  @@map("transactions")
+}
+
+model Milestone {
+  id            String          @id @default(uuid())
+  transactionId String          @map("transaction_id")
+  title         String
+  description   String          @db.Text
+  amount        Decimal         @db.Decimal(15, 2)
+  status        MilestoneStatus @default(PENDING)
+  order         Int             @default(0)
+  otpCode       String?         @map("otp_code")
+  otpVerified   Boolean         @default(false) @map("otp_verified")
+  confirmedAt   DateTime?       @map("confirmed_at")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@map("milestones")
+}
+
+model Dispute {
+  id            String        @id @default(uuid())
+  transactionId String        @map("transaction_id")
+  raisedBy      String        @map("raised_by")
+  reason        String        @db.Text
+  evidenceUrls  String[]      @map("evidence_urls")
+  status        DisputeStatus @default(OPEN)
+  resolution    String?       @db.Text
+  resolvedBy    String?       @map("resolved_by")
+  isFastTrack   Boolean       @default(false) @map("is_fast_track")
+  resolvedAt    DateTime?     @map("resolved_at")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  raiser      User        @relation("RaisedDisputes", fields: [raisedBy], references: [id])
+  resolver    User?       @relation("ResolvedDisputes", fields: [resolvedBy], references: [id])
+
+  @@map("disputes")
+}
+
+model Delivery {
+  id              String    @id @default(uuid())
+  transactionId   String    @unique @map("transaction_id")
+  courierName     String?   @map("courier_name")
+  trackingNumber  String?   @map("tracking_number")
+  otpCode         String    @map("otp_code")
+  deliveryPhotoUrl String?  @map("delivery_photo_url")
+  deliveredAt     DateTime? @map("delivered_at")
+  confirmedAt     DateTime? @map("confirmed_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@map("deliveries")
+}
+
+model Rating {
+  id            String   @id @default(uuid())
+  transactionId String   @map("transaction_id")
+  ratedBy       String   @map("rated_by")
+  ratedUser     String   @map("rated_user")
+  score         Int
+  comment       String?  @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  rater       User        @relation("RatingsMade", fields: [ratedBy], references: [id])
+  rated       User        @relation("RatingsReceived", fields: [ratedUser], references: [id])
+
+  @@unique([transactionId, ratedBy])
+  @@map("ratings")
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String           @map("user_id")
+  message   String
+  type      NotificationType @default(SYSTEM)
+  read      Boolean          @default(false)
+  metadata  Json?
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model AuditLog {
+  id            String   @id @default(uuid())
+  transactionId String?  @map("transaction_id")
+  action        String
+  actorId       String   @map("actor_id")
+  metadata      Json?
+  ipAddress     String?  @map("ip_address")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  transaction Transaction? @relation(fields: [transactionId], references: [id], onDelete: SetNull)
+  actor       User         @relation("ActorLogs", fields: [actorId], references: [id])
+
+  @@map("audit_logs")
+}

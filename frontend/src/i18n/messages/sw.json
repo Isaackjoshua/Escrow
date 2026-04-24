@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "dashboard": "Dashibodi",
+    "transactions": "Miamala",
+    "disputes": "Migogoro",
+    "notifications": "Arifa",
+    "profile": "Wasifu",
+    "logout": "Toka",
+    "admin": "Msimamizi"
+  },
+  "auth": {
+    "register": "Jisajili",
+    "login": "Ingia",
+    "phone": "Nambari ya Simu",
+    "password": "Nenosiri",
+    "confirmPassword": "Thibitisha Nenosiri",
+    "name": "Jina Kamili",
+    "email": "Barua Pepe (Hiari)",
+    "role": "Aina ya Akaunti",
+    "customer": "Mteja",
+    "merchant": "Mfanyabiashara",
+    "nationalId": "Nambari ya Kitambulisho cha Taifa",
+    "brelaNumber": "Nambari ya Usajili wa BRELA",
+    "otp": "Ingiza OTP",
+    "otpSent": "OTP imetumwa kwa {phone}",
+    "verifyOtp": "Thibitisha OTP",
+    "resendOtp": "Tuma tena OTP",
+    "noAccount": "Huna akaunti?",
+    "hasAccount": "Una akaunti tayari?",
+    "phoneHint": "mfano: 0712345678 au +255712345678"
+  },
+  "transaction": {
+    "create": "Muamala Mpya",
+    "merchantPhone": "Nambari ya Simu ya Mfanyabiashara",
+    "amount": "Kiasi (TZS)",
+    "agreement": "Maelezo ya Makubaliano",
+    "agreementHint": "Elezea kinachonunuliwa/kuuzwa, muda wa uwasilishaji, na masharti.",
+    "inspectionWindow": "Muda wa Ukaguzi (masaa)",
+    "photos": "Picha za Bidhaa",
+    "status": {
+      "PENDING": "Inasubiri",
+      "HELD": "Fedha Zimehifadhiwa",
+      "DISPUTED": "Kuna Mgogoro",
+      "RELEASED": "Imekamilika",
+      "REFUNDED": "Imerudishwa",
+      "CANCELLED": "Imefutwa"
+    },
+    "deposit": "Weka Fedha",
+    "release": "Achia Fedha",
+    "cancel": "Futa Muamala",
+    "dispute": "Toa Malalamiko",
+    "confirmDelivery": "Thibitisha Uwasilishaji",
+    "inspectionCountdown": "Muda wa ukaguzi unafungwa ndani ya",
+    "noTransactions": "Hakuna miamala bado"
+  },
+  "milestone": {
+    "title": "Hatua",
+    "add": "Ongeza Hatua",
+    "confirm": "Thibitisha Hatua",
+    "amount": "Kiasi (TZS)",
+    "description": "Maelezo"
+  },
+  "dispute": {
+    "raise": "Toa Malalamiko",
+    "reason": "Sababu ya Malalamiko",
+    "evidence": "Pakia Ushahidi",
+    "fastTrack": "Ukaguzi wa haraka (ada ya TZS 5,000)",
+    "status": {
+      "OPEN": "Wazi",
+      "UNDER_REVIEW": "Inakaguliwa",
+      "RESOLVED": "Imetatuliwa"
+    }
+  },
+  "admin": {
+    "dashboard": "Dashibodi ya Msimamizi",
+    "totalVolume": "Jumla ya Kiasi",
+    "openDisputes": "Migogoro Wazi",
+    "pendingKyc": "KYC Inayosubiri",
+    "disputeRate": "Kiwango cha Migogoro",
+    "approveKyc": "Idhinisha KYC",
+    "rejectKyc": "Kataa KYC",
+    "suspend": "Simamisha Mtumiaji",
+    "activate": "Wezesha Mtumiaji"
+  },
+  "common": {
+    "save": "Hifadhi",
+    "cancel": "Ghairi",
+    "confirm": "Thibitisha",
+    "loading": "Inapakia...",
+    "error": "Hitilafu imetokea",
+    "success": "Imefanikiwa",
+    "search": "Tafuta",
+    "filter": "Chuja",
+    "viewAll": "Ona Yote",
+    "back": "Rudi",
+    "next": "Mbele",
+    "submit": "Wasilisha",
+    "close": "Funga",
+    "currency": "TZS",
+    "noData": "Hakuna data",
+    "page": "Ukurasa",
+    "of": "ya"
+  },
+  "notifications": {
+    "title": "Arifa",
+    "markAllRead": "Weka zote kama zilizosomwa",
+    "noNotifications": "Hakuna arifa"
+  },
+  "ratings": {
+    "rate": "Kadiria muamala huu",
+    "score": "Alama",
+    "comment": "Maoni (hiari)",
+    "average": "Wastani wa Ukadiriaji",
+    "total": "Jumla ya Ukadiriaji"
+  }
+}

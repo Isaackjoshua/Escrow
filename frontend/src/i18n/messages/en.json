@@ -1,0 +1,116 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "disputes": "Disputes",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "logout": "Log Out",
+    "admin": "Admin"
+  },
+  "auth": {
+    "register": "Register",
+    "login": "Log In",
+    "phone": "Phone Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Full Name",
+    "email": "Email Address (Optional)",
+    "role": "Account Type",
+    "customer": "Customer",
+    "merchant": "Merchant",
+    "nationalId": "National ID Number",
+    "brelaNumber": "BRELA Registration Number",
+    "otp": "Enter OTP",
+    "otpSent": "OTP sent to {phone}",
+    "verifyOtp": "Verify OTP",
+    "resendOtp": "Resend OTP",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "phoneHint": "e.g. 0712345678 or +255712345678"
+  },
+  "transaction": {
+    "create": "New Transaction",
+    "merchantPhone": "Merchant Phone Number",
+    "amount": "Amount (TZS)",
+    "agreement": "Agreement Description",
+    "agreementHint": "Describe what is being bought/sold, delivery timeline, and conditions.",
+    "inspectionWindow": "Inspection Window (hours)",
+    "photos": "Product Photos",
+    "status": {
+      "PENDING": "Pending",
+      "HELD": "Funds Held",
+      "DISPUTED": "Disputed",
+      "RELEASED": "Completed",
+      "REFUNDED": "Refunded",
+      "CANCELLED": "Cancelled"
+    },
+    "deposit": "Deposit Funds",
+    "release": "Release Funds",
+    "cancel": "Cancel Transaction",
+    "dispute": "Raise Dispute",
+    "confirmDelivery": "Confirm Delivery",
+    "inspectionCountdown": "Inspection window closes in",
+    "noTransactions": "No transactions yet"
+  },
+  "milestone": {
+    "title": "Milestone",
+    "add": "Add Milestone",
+    "confirm": "Confirm Milestone",
+    "amount": "Amount (TZS)",
+    "description": "Description"
+  },
+  "dispute": {
+    "raise": "Raise Dispute",
+    "reason": "Reason for Dispute",
+    "evidence": "Upload Evidence",
+    "fastTrack": "Fast-track review (TZS 5,000 fee)",
+    "status": {
+      "OPEN": "Open",
+      "UNDER_REVIEW": "Under Review",
+      "RESOLVED": "Resolved"
+    }
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "totalVolume": "Total Volume",
+    "openDisputes": "Open Disputes",
+    "pendingKyc": "Pending KYC",
+    "disputeRate": "Dispute Rate",
+    "approveKyc": "Approve KYC",
+    "rejectKyc": "Reject KYC",
+    "suspend": "Suspend User",
+    "activate": "Activate User"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "search": "Search",
+    "filter": "Filter",
+    "viewAll": "View All",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close",
+    "currency": "TZS",
+    "noData": "No data available",
+    "page": "Page",
+    "of": "of"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "noNotifications": "No notifications"
+  },
+  "ratings": {
+    "rate": "Rate this transaction",
+    "score": "Score",
+    "comment": "Comment (optional)",
+    "average": "Average Rating",
+    "total": "Total Ratings"
+  }
+}
