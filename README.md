@@ -1,6 +1,6 @@
-# Escrow255 — Secure Escrow Payment Platform for East Africa
+# Amana255 — Secure Escrow Payment Platform for East Africa
 
-A production-ready escrow payment web application built for the Tanzanian and East African market, launching in Dar es Salaam. Funds are securely held until the customer confirms delivery, with full dispute resolution, milestone-based payments, and mobile money integration.
+A escrow payment web application built for the Tanzanian and East African market, launching in Dar es Salaam. Funds are securely held until the customer confirms delivery, with full dispute resolution, milestone-based payments, and mobile money integration.
 
 ---
 
@@ -363,4 +363,4 @@ Set `NODE_ENV=production` and ensure:
 
 ---
 
-*Built for Tanzania 🇹🇿 — Escrow255, Dar es Salaam*
+*Built for Tanzania 🇹🇿 — Amana, Dar es Salaam*
